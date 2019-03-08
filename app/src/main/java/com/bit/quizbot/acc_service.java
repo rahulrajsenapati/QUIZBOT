@@ -20,7 +20,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 public class acc_service extends AccessibilityService {
     public acc_service() {
     }
-    static String quesfs="a";
+    int password[]={3,2,1,5,7,8,9};
     //int mDebugDepth;
     AccessibilityNodeInfo mNodeInfo;
     AccessibilityNodeInfo parentInfo;
@@ -34,12 +34,14 @@ public class acc_service extends AccessibilityService {
             return;
         parentInfo =gettosource(mNodeInfo);
         Nodeprinter(parentInfo, "");
-        actiontaken(parentInfo);
+        if(parentInfo!=null)
+           actiontaken(parentInfo);
         Log.v("FINAL:::", String.format("onAccessibilityEvent: type = [ %s ], class = [ %s ], package = [ %s ], time = [ %s ], text = [ %s ]", event.getEventType(), event.getClassName(), event.getPackageName(), event.getEventTime(), event.getText()));
     }
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void actiontaken(AccessibilityNodeInfo node) {
+        /*
         if(node.getChildCount()==5)
             if(node.getChild(1)!=null)
                 if(node.getChild(1).getViewIdResourceName()!=null)
@@ -60,8 +62,8 @@ public class acc_service extends AccessibilityService {
                     }
 
 
-                        /*
-        if (node.getChildCount() >= 2) {
+                        */
+        if (node.getChildCount() >= 1) {
             if (node.getChild(0) != null){
                 if (node.getChild(0).getViewIdResourceName() != null) {
                     Log.e(":::", "done with:" + node.getChild(0).getViewIdResourceName());
@@ -88,15 +90,23 @@ public class acc_service extends AccessibilityService {
 
 
                     }
-                    else if(node.getChild(0).getViewIdResourceName().equalsIgnoreCase("com.android.systemui:id/keyguard_host_view")){
-                        Log.e(":::", "Finnaly execution password"+node.getChild(4).getViewIdResourceName());
-                        node.getChild(0).getChild(4).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                   else if(node.getChild(0).getViewIdResourceName().equalsIgnoreCase("com.android.systemui:id/keyguard_host_view")){
+                        for(int i = 0;i< password.length; i++){
+                            Log.e(":::","executing typing"+node.getChild(0).getChild(password[i]+1).getViewIdResourceName());
+                            node.getChild(0).getChild(password[i]+1).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+
+
+                        }
+
+                        Log.e(":::", "Finnaly execution enter");
+                        if(node.getChild(0).getChild(12)!=null)
+                              node.getChild(0).getChild(12).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
                 }
             }
 
         }
-        */
+
     }
     @Override
     public void onInterrupt() {
