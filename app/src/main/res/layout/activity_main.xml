@@ -12,10 +12,11 @@
         android:layout_height="wrap_content"
         android:onClick="Start"
         android:text="START"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
         app:layout_constraintVertical_bias="0.3" />
 
     <Button
@@ -30,4 +31,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.32999998" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="enter command here"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:text="add command"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editText" />
 </android.support.constraint.ConstraintLayout>

@@ -21,14 +21,12 @@ public class acc_service extends AccessibilityService {
     public acc_service() {
     }
     int password[]={3,2,1,5,7,8,9};
-    //int mDebugDepth;
     AccessibilityNodeInfo mNodeInfo;
     AccessibilityNodeInfo parentInfo;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        //mDebugDepth = 0;
         mNodeInfo = event.getSource();
         if(mNodeInfo==null)
             return;
@@ -41,28 +39,6 @@ public class acc_service extends AccessibilityService {
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void actiontaken(AccessibilityNodeInfo node) {
-        /*
-        if(node.getChildCount()==5)
-            if(node.getChild(1)!=null)
-                if(node.getChild(1).getViewIdResourceName()!=null)
-                    if(node.getChild(1).getViewIdResourceName().equalsIgnoreCase("com.bit.quizbot:id/question")){
-                        String datatoc="";
-                        String que=node.getChild(1).getText().toString().replace("?","").toLowerCase();
-                        if(que.equals(quesfs))
-                            return;
-                        else
-                        {
-                            datatoc=que+"5662"+node.getChild(2).getText().toString().toLowerCase()+"5662"+node.getChild(3).getText().toString().toLowerCase()+"5662"+node.getChild(4).getText().toString().toLowerCase();
-                            socketconn sendc=new socketconn();
-                            sendc.execute(datatoc);
-                            Log.e(":::","SEND QUE TO COMP:"+datatoc);
-                        }
-
-
-                    }
-
-
-                        */
         if (node.getChildCount() >= 1) {
             if (node.getChild(0) != null){
                 if (node.getChild(0).getViewIdResourceName() != null) {
@@ -119,38 +95,17 @@ public class acc_service extends AccessibilityService {
         else
             return gettosource(node.getParent());
     }
-    /*
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    private void printAllViews(AccessibilityNodeInfo mNodeInfo) {
-        if (mNodeInfo == null) return;
-        String log = "";
-        for (int i = 0; i < mDebugDepth; i++) {
-            log += ".";
-        }
-        log += "(" + mNodeInfo.getText() + "==" + ((mNodeInfo.getViewIdResourceName() != null) ? mNodeInfo.getViewIdResourceName() : "NO VIEW ID") + "<--" + ((mNodeInfo.getParent() != null) ? mNodeInfo.getParent().getViewIdResourceName() : "NO PARENT ID") + ")";
-        Log.d("::::", log);
-        if (mNodeInfo.getChildCount() < 1) return;
-        mDebugDepth++;
-        for (int i = 0; i < mNodeInfo.getChildCount(); i++) {
-            printAllViews(mNodeInfo.getChild(i));
-        }
-        mDebugDepth--;
-    }*/
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void Nodeprinter(AccessibilityNodeInfo mNodeInfo,String logu){
         if(mNodeInfo == null) return ;
         String log = "";
-        //for(int i = 0; i < mDebugDepth; i++){
-       //    log+=".";
-        //}
-
-        log= logu+ "("+mNodeInfo.getText()+"=="+((mNodeInfo.getViewIdResourceName() != null)?mNodeInfo.getViewIdResourceName():"NO VIEW ID")+"("+((mNodeInfo.isClickable())?"CLICKABLE":"")+")"+ "<--"+((mNodeInfo.getParent() != null)?mNodeInfo.getParent().getViewIdResourceName():"NO PARENT")+")";
+       log= logu+ "("+mNodeInfo.getText()+"=="+((mNodeInfo.getViewIdResourceName() != null)?mNodeInfo.getViewIdResourceName():"NO VIEW ID")+"("+((mNodeInfo.isClickable())?"CLICKABLE":"")+")"+ "<--"+((mNodeInfo.getParent() != null)?mNodeInfo.getParent().getViewIdResourceName():"NO PARENT")+")";
         Log.d("::::", log);
         if(mNodeInfo.getChildCount()<1) return ;
-       // mDebugDepth++;
+
         for(int i = 0; i < mNodeInfo.getChildCount(); i++){
             Nodeprinter(mNodeInfo.getChild(i),logu+"."+String.valueOf(i));
         }
-       // mDebugDepth--;
+
     }
 }
